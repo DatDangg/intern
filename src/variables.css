@@ -1,0 +1,36 @@
+:root {
+  --primary-color-1: #f22409;
+  --primary-color-2: #0623A3;
+  --primary-color-3: #0044FF;
+  --primary-color-4: #000066;
+  --white-color: #fff;
+  --black-color: #000;
+}
+
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.separator {
+  height: 1px;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
+  border-radius: 2px;
+}
+
+.no-data {
+  text-align: center;
+  color: gray;
+}
+
+.loading,
+.error {
+  text-align: center;
+  color: #e44d26;
+  font-weight: bold;
+  margin: 20px 0;
+}

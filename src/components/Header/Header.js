@@ -8,58 +8,50 @@ const Header = ({ onMenuClick }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const fetchCurrentUser = async () => {
-      const userId = localStorage.getItem("currentUser");
-      if (userId) {
-        try {
-          const response = await axios.get("http://localhost:3001/users");
-          const user = response.data.find((user) => user.id === userId);
-          setCurrentUser(user);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("authToken");
+      const maUser = localStorage.getItem("maUser");
+
+      if (!maUser || !token) return;
+
+      try {
+        const { data } = await axios.get(`http://localhost:8888/admin/getId/${maUser}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setCurrentUser(data);
+      } catch {
+        console.error("Error fetching user data");
       }
     };
 
-    fetchCurrentUser();
+    fetchUserData();
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("currentUser");
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("maUser");
     window.location.href = "/login";
   };
 
   return (
     <header className="header">
-      <button className="header-menu-button" onClick={onMenuClick}>
-        ☰
-      </button>
+      <button className="header-menu-button" onClick={onMenuClick}>☰</button>
       <div className="header-logo">
-        <img src="/image/Logo.png" alt="Thăng Long University" />
+        <img src="/image/Logo.png" alt="Thang Long University" />
       </div>
       <div className="header-user">
         {currentUser ? (
           <>
             <div className="user-info">
-              <span className="user-name">{currentUser.name}</span>
-              <span className="user-id">{currentUser.id}</span>
+              <span className="user-name">{currentUser.userProfileResponse.hoVaTen}</span>
+              <span className="user-id">{currentUser.maUser}</span>
             </div>
-            <div
-              className="avatar-wrapper"
-              onMouseEnter={() => setIsMenuOpen(true)}
-              onMouseLeave={() => setIsMenuOpen(false)}
-            >
-              <img
-                src="/image/avatar.png"
-                alt="Avatar"
-                className="user-avatar"
-              />
+            <div className="avatar-wrapper" onMouseEnter={() => setIsMenuOpen(true)} onMouseLeave={() => setIsMenuOpen(false)}>
+              <img src="/image/avatar.png" alt="Avatar" className="user-avatar" />
               <div className="header-connect"></div>
               {isMenuOpen && (
                 <div className="header-menu-dropdown">
-                  <button className="header-logout-button" onClick={handleLogout}>
-                    Logout
-                  </button>
+                  <button className="header-logout-button" onClick={handleLogout}>Logout</button>
                 </div>
               )}
             </div>

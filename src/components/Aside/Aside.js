@@ -8,6 +8,16 @@ const Aside = ({ isVisible, toggleAside }) => {
     <aside className={`aside ${isVisible ? "visible" : ""}`}>
       <nav>
         <ul className="aside-menu">
+          {/* <li>
+            <NavLink 
+              to="/infor" 
+              className="aside-menu__item" 
+              onClick={toggleAside}
+            >
+              <img src="/image/image5.png" alt="Thông tin sinh viên" />
+              Thông tin sinh viên
+            </NavLink>
+          </li> */}
           <li>
             <NavLink 
               to="/backlog" 

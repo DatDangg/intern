@@ -5,12 +5,16 @@ import "../../variables.css";
 import "./style.css";
 
 const CoursesInTerm = () => {
+  // Danh sách năm học lấy từ list ngành (namDaotao)
   const [academicYears, setAcademicYears] = useState([]); 
   const [selectedYear, setSelectedYear] = useState("");
-  const [semesters, setSemesters] = useState([]); 
-  const [selectedSemester, setSelectedSemester] = useState(""); 
-  const [groups, setGroups] = useState([]); 
-  const [selectedGroup, setSelectedGroup] = useState(""); 
+  // Học kỳ và nhóm cố định: chỉ có 1, 2, 3
+  const semesters = ["1", "2", "3"];
+  const [selectedSemester, setSelectedSemester] = useState("");
+  const groups = ["1", "2", "3"];
+  const [selectedGroup, setSelectedGroup] = useState("");
+
+  // Danh sách môn học trả về từ API TKB
   const [courses, setCourses] = useState([]); 
   const [filteredCourses, setFilteredCourses] = useState([]); 
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,55 +24,43 @@ const CoursesInTerm = () => {
   const location = useLocation();
   const courseDetails = location.state || {}; 
 
+  // Load danh sách ngành để lấy ra tất cả các năm học tồn tại (namDaotao)
   useEffect(() => {
-    const loadInitialData = async () => {
+    const loadAcademicYears = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/courseInTerm");
-        const courseData = response.data;
-
+        const response = await axios.get("http://localhost:8888/admin/listNganh");
+        // Giả sử response.data là một mảng đối tượng có trường "namDaotao"
         const years = Array.from(
-          new Set(courseData.map((item) => item.year))
-        ); 
+          new Set(response.data.map((item) => item.namDaotao))
+        );
         setAcademicYears(years);
-
-        const semesters = Array.from(
-          new Set(courseData.map((item) => item.semester))
-        ); 
-        setSemesters(semesters);
-
-        const groups = Array.from(
-          new Set(courseData.map((item) => item.group))
-        ); 
-        setGroups(groups);
-
+        // Chọn năm mặc định là năm đầu tiên
         const defaultYear = years[0];
-        const defaultSemester = semesters[0];
-        const defaultGroup = groups[0];
         setSelectedYear(defaultYear);
-        setSelectedSemester(defaultSemester);
-        setSelectedGroup(defaultGroup);
-
-        fetchCourses(defaultYear, defaultSemester, defaultGroup);
+        // Đặt mặc định học kỳ và nhóm là phần tử đầu của mảng cố định
+        setSelectedSemester(semesters[0]);
+        setSelectedGroup(groups[0]);
+        fetchCourses(defaultYear, semesters[0], groups[0]);
       } catch (err) {
         console.error(err);
-        setError("Lỗi khi tải dữ liệu.");
+        setError("Lỗi khi tải danh sách năm học từ danh sách ngành.");
       } finally {
         setLoading(false);
       }
     };
 
-    loadInitialData();
+    loadAcademicYears();
   }, []);
 
+  // Hàm gọi API TKB mới theo năm, học kỳ và nhóm học
   const fetchCourses = async (year, semester, group) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/courseInTerm?year=${year}&semester=${semester}&group=${group}`
+        `http://localhost:8888/admin/TKB/${year}/${semester}/${group}`
       );
-      const data = response.data;
-      const courses = data.length > 0 ? data[0].courses : [];
-      setCourses(courses);
-      setFilteredCourses(courses);
+      // API trả về trực tiếp mảng các đối tượng course
+      setCourses(response.data);
+      setFilteredCourses(response.data);
     } catch (err) {
       console.error(err);
       setError("Lỗi khi tải danh sách môn học.");
@@ -93,22 +85,23 @@ const CoursesInTerm = () => {
   const handleSearch = () => {
     const searchResult = courses.filter(
       (course) =>
-        course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.code.toLowerCase().includes(searchTerm.toLowerCase())
+        course.tenMonHoc.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        course.maMonHoc.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredCourses(searchResult);
   };
 
+  // Nếu có thông tin chi tiết môn học được chuyển qua từ trang khác
   useEffect(() => {
-    if (courseDetails.code) {
+    if (courseDetails.maMonHoc) {
       const fetchFilteredCourses = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/courseInTerm?year=${courseDetails.year}&semester=${courseDetails.semester}&group=${courseDetails.group}`
+            `http://localhost:8888/admin/TKB/${courseDetails.namHoc}/${courseDetails.kiHoc}/${courseDetails.nhomHoc}`
           );
-          const data = response.data[0]?.courses || [];
+          const data = response.data || [];
           const filtered = data.filter(
-            (course) => course.code === courseDetails.code
+            (course) => course.maMonHoc === courseDetails.maMonHoc
           );
           setFilteredCourses(filtered);
         } catch (err) {
@@ -224,15 +217,15 @@ const CoursesInTerm = () => {
                 </tr>
               ) : (
                 filteredCourses.map((course, index) => (
-                  <tr key={course.id}>
+                  <tr key={course.maMonHoc + index}>
                     <td>{index + 1}</td>
-                    <td>{course.code}</td>
-                    <td>{course.name}</td>
-                    <td>{course.className}</td>
-                    <td>{course.day}</td>
-                    <td>{course.period}</td>
-                    <td>{course.room}</td>
-                    <td>{course.instructor}</td>
+                    <td>{course.maMonHoc}</td>
+                    <td>{course.tenMonHoc}</td>
+                    <td>{course.tenLop}</td>
+                    <td>{course.ngayHoc}</td>
+                    <td>{course.caHoc}</td>
+                    <td>{course.phongHoc}</td>
+                    <td>{course.giangVien}</td>
                   </tr>
                 ))
               )}

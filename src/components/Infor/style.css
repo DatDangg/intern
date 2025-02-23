@@ -1,0 +1,22 @@
+.infor {
+    background: #f4f4f4; 
+    padding: 20px; 
+    min-height: 100vh; 
+  }
+  
+  .infor-header {
+    margin-bottom: 20px;
+  }
+  
+  .infor-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e44d26;
+    margin: 0;
+  }
+  .infor-content {
+    background: #fff; 
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }

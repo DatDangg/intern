@@ -1,0 +1,96 @@
+.backlog {
+  background: #f4f4f4; 
+  padding: 20px; 
+  min-height: 100vh; 
+}
+
+.backlog-header {
+  margin-bottom: 20px;
+}
+
+.backlog-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e44d26;
+  margin: 0;
+}
+
+.backlog-content {
+  background: #fff; 
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.backlog-filters {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.backlog-filters select {
+  padding: 8px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.backlog-filters select:hover {
+  border: 1.5px solid #4e4e4e;
+  cursor: pointer;
+}
+
+.backlog-filters select:hover + .filter-name{
+  color: #4e4e4e;
+}
+
+.backlog-table_container {
+  overflow-x: auto; 
+}
+
+.backlog-course_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.backlog-course_table th, 
+.backlog-course_table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.backlog-course_table th {
+  background: #e44d26;
+  color: #fff; 
+}
+
+.backlog-course_table td {
+  background: #fff;
+  color: #333; 
+}
+
+.backlog-course_table tr:nth-child(even) {
+  background: #f9f9f9; 
+}
+
+.state_link {
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+
+@media screen and (max-width: 400px) {
+  .backlog-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    width: 100%;
+  }
+
+  .backlog-filters select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+}

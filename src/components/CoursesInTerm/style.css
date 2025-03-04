@@ -1,0 +1,261 @@
+.courses-term {
+  background: #f4f4f4;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.courses-term__header {
+  margin-bottom: 20px;
+}
+
+.courses-term__title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e44d26;
+  margin: 0;
+}
+
+.courses-term__subtitle {
+  font-size: 16px;
+  font-weight: lighter;
+  color: #535353;
+  margin-left: 25px;
+  padding: 5px;
+}
+
+.courses-term__content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.courses-term__filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filters-left {
+  display: flex;
+  gap: 10px;
+}
+
+.filters-right {
+  display: flex;
+  align-items: center;
+}
+
+.courses-term__filters select {
+  padding: 8px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.courses-term__filters select:hover {
+  border: 1.5px solid #4e4e4e;
+  cursor: pointer;
+}
+
+.courses-term__filters select:hover + .filter-name{
+  color: #4e4e4e;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  width: 200px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.search-bar:hover {
+  border: 1px solid #4e4e4e;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 10px 12px;
+  font-size: 14px;
+  flex: 1;
+  color: #7a7a7a;
+  border-radius: 8px 0 0 8px;
+}
+
+.search-bar button {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  bottom: 3px;
+  background-color: #f44336;
+  border: none;
+  padding: 0 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.search-bar button:hover {
+  background-color: #d32f2f;
+}
+
+@media screen and (max-width: 768px) {
+  .courses-term__filters {
+    flex-direction: column; 
+    gap: 10px;
+  }
+
+  .filters-left {
+    width: 100%; 
+    display: flex;
+    gap: 10px;
+  }
+
+  .filters-right {
+    width: 100%; 
+    display: flex;
+    justify-content: flex-start; 
+  }
+
+  .search-bar {
+    width: 100%; 
+  }
+
+  .search-bar input {
+    flex: 1; 
+  }
+}
+
+
+@media screen and (max-width: 850px) {
+  .courses-term__filters {
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+    align-items: center;
+    width: 100%;
+  }
+
+  .filters-left {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .filters-left select {
+    width: 30%; 
+    min-width: 120px;
+  }
+
+  .filters-right {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+  }
+
+  .search-bar {
+    height: 55px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-bar input {
+    width: 80%; 
+  }
+
+  .search-bar button {
+    width: 13%; 
+    min-width: 40px;
+    margin: 2px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .courses-term__filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    width: 100%;
+  }
+
+  .filters-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .filters-left select {
+    width: 100%; 
+    padding: 10px;
+    font-size: 16px; 
+  }
+
+  .search-bar {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-bar input {
+    width: 100%; 
+  }
+
+  .search-bar button {
+    width: 20%; 
+    min-width: 40px;
+    margin: 3px ;
+  }
+}
+
+
+.courses-term__table-content {
+  overflow-x: auto;
+}
+
+.courses-term__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.courses-term__table th,
+.courses-term__table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.courses-term__table th {
+  background: #e44d26;
+  color: #fff;
+}
+
+.courses-term__table td {
+  background: #fff;
+  color: #333;
+}
+
+.courses-term__table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.courses-term__table tr.courses-term__highlight td{
+  background-color: #ffff99 !important;
+}
+  

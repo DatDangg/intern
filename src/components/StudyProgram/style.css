@@ -1,0 +1,67 @@
+.studyprogram {
+    background: #f4f4f4;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.studyprogram-header {
+    margin-bottom: 20px;
+}
+
+.studyprogram-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e44d26;
+    margin: 0;
+}
+
+
+.studyprogram-content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.studyprogram-filters {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.studyprogram-filters select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.studyprogram-table_container {
+    overflow-x: auto;
+}
+
+.studyprogram-course_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.studyprogram-course_table th,
+.studyprogram-course_table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.studyprogram-course_table th {
+    background: #e44d26;
+    color: #fff;
+}
+
+.studyprogram-course_table td {
+    background: #fff;
+    color: #333;
+}
+
+.studyprogram-course_table tr:nth-child(even) {
+    background: #f9f9f9;
+}

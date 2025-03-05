@@ -7,6 +7,9 @@ import "./App.css";
 const Backlog = lazy(() => import("./components/Backlog/Backlog"));
 const CoursesInTerm = lazy(() => import("./components/CoursesInTerm/CoursesInTerm"));
 const Login = lazy(() => import("./components/Login/Login"));
+const AlternativeSubject = lazy(() => import("./components/AlternativeSubject/AlternativeSubject"));
+const StudyProgram = lazy(() => import("./components/StudyProgram/StudyProgram"));
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("authToken"));
@@ -50,6 +53,8 @@ function App() {
                     <Route path="/" element={<Navigate to="/backlog" replace />} />
                     <Route path="/backlog" element={<Backlog />} />
                     <Route path="/courses-in-term" element={<CoursesInTerm />} />
+                    <Route path="/alternative" element={<AlternativeSubject />} />
+                    <Route path="/study-pro" element={<StudyProgram />} />
                   </Routes>
                 </Suspense>
               </div>

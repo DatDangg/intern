@@ -28,6 +28,26 @@ const Aside = ({ isVisible, toggleAside }) => {
               Môn trong kỳ
             </NavLink>
           </li>
+          <li>
+            <NavLink 
+              to="/alternative" 
+              className="aside-menu__item" 
+              onClick={toggleAside}
+            >
+              <img src="/image/image3.png" alt="Môn thay thế" />
+              Môn thay thế
+            </NavLink>
+          </li>
+          <li>
+            <NavLink 
+              to="/study-pro" 
+              className="aside-menu__item" 
+              onClick={toggleAside}
+            >
+              <img src="/image/image1.png" alt="Chương trình đào tạo" />
+              Chương trình đào tạo
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>
